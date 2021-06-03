@@ -22,7 +22,7 @@ function countdown() {
 
     var timeInterval = setInterval(function() {
 
-        if (timeLeft > 1) {
+        if (timeLeft > 0) {
             timerEl.textContent = 'Timer: ' + timeLeft;
             timeLeft--;
             console.log(timeLeft);
@@ -31,10 +31,9 @@ function countdown() {
             clearInterval(timeInterval);
             displayMessage();
         };
-        // document.getElementById('countdown').innerHTML = (timeLeft);
     }, 1000); 
     
-    // if get question wrong, then timeLeft()
+    // if get question wrong, then timeLeft - 10
 };
 
 
