@@ -11,9 +11,10 @@ body {
   margin-bottom: 0.8rem;
   width: 100%;
   border-radius: 4px;
-  background: rgb(18, 93, 255);
+  background: blue;
   font-size: 3rem;
-  min-width: 80rem;
+  min-width: 20rem;
+  padding: 5rem;
 }
 
 .choice-container:hover {
@@ -23,10 +24,10 @@ body {
   transform: transform 100ms;
 }
 
-.choice-prefix {
+/* .choice-prefix {
   padding: 2rem 2.5rem;
   color: white;
-}
+} */
 
 .choice-text {
   padding: 2rem;
@@ -49,9 +50,38 @@ h1 {
 /* .timer {
   border: 1px solid black;
 } */
+
 .high-scores {
 }
 
 .questions {
   text-align: center;
+}
+
+.correct {
+  background: green;
+}
+
+.incorrect {
+  background: red;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+#game {
+  height: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .choice-container {
+    min-width: 40rem;
+  }
 }

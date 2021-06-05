@@ -15,12 +15,11 @@ const scoreText = document.querySelector('#score');
 
 let currentQuestion = {}
 let acceptingAnswers = true
-// Start the game with a score of 0
-let score = 0
 let questionCounter = 0
 let availableQuestions = []
+
 // Start the timer at:
-var timeLeft = 6;
+var timeLeft = 10;
 
 var timerEl = document.getElementById('countdown');
 var mainEl = document.getElementById('main');
@@ -42,9 +41,7 @@ function countdown() {
             // displayMessage("the game is over. please enter your initials");
             // window.prompt("the game is over. please enter your initials")
         };
-    }, 1000); 
-    
-    // if get question wrong, then timeLeft - 10
+    }, 1000);   
 };
 
 let questions = [
@@ -82,13 +79,12 @@ let questions = [
     },
     {
         question: 'What is Oliver?',
-        choice1: 'an Tazmanian Devil',
+        choice1: 'a Tazmanian Devil',
         choice2: 'my son',
         choice3: 'a kid',
         choice4: 'all of the above',
         answer: 4,
     },
-
 ]
 
 // // loop over every question object
@@ -116,18 +112,18 @@ let questions = [
 
 // var score = (timeLeft);
 
-const SCORE_POINTS = 100
-const MAX_QUESTIONS = 4
+// const SCORE_POINTS = 100
+const maxQuestions = 5
 
 startGame = function() {
     questionCounter = 0
-    score = 0
+    // score = 0
     availableQuestions = [...questions]
     getNewQuestion()
 }
 
 getNewQuestion = function() {
-    if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+    if(availableQuestions.length === 0 || questionCounter > maxQuestions) {
         localStorage.setItem('mostRecentScore', score)
         return window.location.assign('./end.html')
     }
@@ -145,7 +141,7 @@ getNewQuestion = function() {
         choice.innerText = currentQuestion['choice' + number]
     })
 
-    availableQuestions.splice(questionsIndex, 1)
+    // availableQuestions.splice(questionsIndex, 1)
 
     acceptingAnswers = true
 }
@@ -161,7 +157,11 @@ choices.forEach(choice => {
         let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
 
         if(classToApply === 'correct') {
-            incrementScore(SCORE_POINTS)
+            // go to next question
+        }
+
+        else {
+            timeLeft = timeLeft - 10
         }
 
         selectedChoice.parentElement.classList.add(classToApply)
@@ -169,11 +169,13 @@ choices.forEach(choice => {
         setTimeout(function() {
             selectedChoice.parentElement.classList.remove(classToApply)
             getNewQuestion()
-
+            
         }, 1000)
     })
 })
 
+ // if get question wrong, then timeLeft - 10
+
+startBtn.onclick = countdown;
 startGame();
  
-startBtn.onclick = countdown;
