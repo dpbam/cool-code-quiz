@@ -12,14 +12,15 @@ const question = document.querySelector('#question');
 const choices = Array.from(document.querySelectorAll('.choice-text'));
 // const progressText = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
+const game = document.querySelector('#game');
 
 let currentQuestion = {}
 let acceptingAnswers = true
 let questionCounter = 0
-let availableQuestions = []
+// let availableQuestions = []
 
 // Start the timer at:
-var timeLeft = 10;
+var timeLeft = 1000;
 
 var timerEl = document.getElementById('countdown');
 var mainEl = document.getElementById('main');
@@ -30,6 +31,7 @@ var startBtn = document.getElementById('start');
 function countdown() {
     
     var timeInterval = setInterval(function() {
+        game.style.display = 'flex';
 
         if (timeLeft >= 0) {
             timerEl.textContent = 'Timer: ' + timeLeft;
@@ -118,32 +120,63 @@ const maxQuestions = 5
 startGame = function() {
     questionCounter = 0
     // score = 0
-    availableQuestions = [...questions]
+    // availableQuestions = questions
     getNewQuestion()
 }
 
 getNewQuestion = function() {
-    if(availableQuestions.length === 0 || questionCounter > maxQuestions) {
-        localStorage.setItem('mostRecentScore', score)
+    if(questions.length === 0 || questionCounter > maxQuestions) {
+        localStorage.setItem('mostRecentScore', timeLeft)
         return window.location.assign('./end.html')
     }
 
-    // questionCounter++
+    questionCounter++
     // progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
     // progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
 
-    const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
-    currentQuestion = availableQuestions[questionsIndex]
+    const questionsIndex = Math.floor(Math.random() * questions.length)
+    currentQuestion = questions[0]
     question.innerText = currentQuestion.question
 
-    choices.forEach(choice => {
-        const number = choice.dataset['number']
-        choice.innerText = currentQuestion['choice' + number]
-    })
+    for (var i=0; i <= (choices.length - 1); i++) {
+        var choice = choices[i];
+        choice.innerText = currentQuestion['choice' + (i + 1)];
+    }
+
+    // choices.forEach(choice = function() {
+    //     const number = choice.dataset['choicenumber']
+    //     choice.innerText = currentQuestion['choice' + number]
+    // })
 
     // availableQuestions.splice(questionsIndex, 1)
 
     acceptingAnswers = true
+}
+
+for (var i=0; i <= (choices.length - 1); i++) {
+    var choice = choices[i];
+    choice.addEventListener('click', function(clickEvent) {
+        console.log(choice);
+        console.log(clickEvent);
+        if(!acceptingAnswers) return
+        acceptingAnswers = false
+        const userChoice = clickEvent.target
+        const selectedAnswer = userChoice.dataset['choicenumber']
+        console.log(selectedAnswer)
+
+        if(selectedAnswer == currentQuestion.answer) {
+            userChoice.style.backgroundColor = 'green' 
+        }
+        else {
+            userChoice.style.backgroundColor = 'red'
+            timeLeft = timeLeft - 10
+        }
+        setTimeout(function() {
+            userChoice.style.backgroundColor = 'unset'
+            getNewQuestion()
+        }, 1000)   
+
+    });
 }
 
 choices.forEach(choice => {
@@ -160,16 +193,13 @@ choices.forEach(choice => {
             // go to next question
         }
 
-        else {
-            timeLeft = timeLeft - 10
-        }
 
         selectedChoice.parentElement.classList.add(classToApply)
 
         setTimeout(function() {
             selectedChoice.parentElement.classList.remove(classToApply)
             getNewQuestion()
-            
+
         }, 1000)
     })
 })
