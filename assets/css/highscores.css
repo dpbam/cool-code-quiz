@@ -11,3 +11,21 @@ body {
   font-size: 2.8rem;
   margin-bottom: 0.5rem;
 }
+
+.highscores-box {
+  width: 100%;
+  height: 100%;
+  background-color: cornflowerblue;
+  border: white;
+  border-style: solid;
+  border-radius: 4px;
+  padding: 2rem;
+}
+
+.go-back a {
+  color: antiquewhite;
+}
+
+.go-back a:hover {
+  color: cadetblue;
+}

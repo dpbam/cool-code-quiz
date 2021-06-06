@@ -20,7 +20,7 @@ body {
 
 .choice-container:hover {
   cursor: pointer;
-  box-shadow: 0 0.4rem 1.4rem 0 rgba(6, 103, 247, 0.5);
+  box-shadow: 0 0.4rem 1.4rem 0 blue;
   transform: scale(1.02);
   transition: transform 100ms;
 }
@@ -52,7 +52,12 @@ h1 {
   border: 1px solid black;
 } */
 
-.high-scores {
+.high-scores a {
+  color: antiquewhite;
+}
+
+.high-scores a:hover {
+  color: cadetblue;
 }
 
 .questions {
@@ -80,6 +85,12 @@ h1 {
 #game {
   display: none;
   align-items: center;
+}
+
+#start {
+  font-size: 1rem;
+  color: blue;
+  padding: 0.5rem;
 }
 
 @media screen and (max-width: 768px) {
