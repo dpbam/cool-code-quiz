@@ -5,3 +5,38 @@
 #end a:hover {
   color: cadetblue;
 }
+
+#finalScore {
+  background-color: red;
+}
+
+.end-form-container {
+  padding: 2rem;
+}
+
+.end-text {
+  font-size: 2rem;
+}
+
+#username {
+  padding: 0.5rem;
+  font-size: 2rem;
+}
+
+#saveScoreBtn {
+  color: antiquewhite;
+  background-color: blue;
+  /* display: flex; */
+  margin-bottom: 0.8rem;
+  width: 50px;
+  border-radius: 4px;
+  background: blue;
+  font-size: 1rem;
+  min-width: 10rem;
+  padding: 1rem;
+}
+
+#saveScoreBtn:hover {
+  color: blue;
+  background-color: antiquewhite;
+}
