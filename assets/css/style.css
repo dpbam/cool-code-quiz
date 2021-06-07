@@ -46,11 +46,17 @@ body {
 h1 {
   font-size: 2rem;
   color: #fff;
+  background-color: aqua;
 }
 
 /* .timer {
   border: 1px solid black;
 } */
+
+.high-scores {
+  display: flex;
+  justify-content: flex-end;
+}
 
 .high-scores a {
   color: antiquewhite;
